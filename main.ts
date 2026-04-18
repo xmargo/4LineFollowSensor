@@ -23,7 +23,7 @@ namespace four_line_follow {
 
     const LINE_FOLLOWER_I2C_ADDR = 0x78   
 
-    export function get_line_followers(lineFollowerSensor: LineFollowerSensors, lineColor: LineColor): number {
+    export function get_line_followers(lineFollowerSensor: LineFollowerSensors): number {
         pins.i2cWriteNumber(LINE_FOLLOWER_I2C_ADDR, 1, NumberFormat.UInt8BE);
         let data = pins.i2cReadNumber(LINE_FOLLOWER_I2C_ADDR, NumberFormat.UInt8BE);
         let sensorValue = 0;
