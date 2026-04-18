@@ -23,20 +23,34 @@ namespace four_line_follow {
 
     const LINE_FOLLOWER_I2C_ADDR = 0x78   
 
-	export function get_line_followers(lineFollowerSensor: LineFollowerSensors, lineColor: LineColor): number {
-        pins.i2cWriteNumber(LINE_FOLLOWER_I2C_ADDR, 1, NumberFormat.UInt8BE);	    
-	    let data = pins.i2cReadNumber(LINE_FOLLOWER_I2C_ADDR, NumberFormat.UInt8BE);
+    export function get_line_followers(lineFollowerSensor: LineFollowerSensors, lineColor: LineColor): number {
+        pins.i2cWriteNumber(LINE_FOLLOWER_I2C_ADDR, 1, NumberFormat.UInt8BE);
+        let data = pins.i2cReadNumber(LINE_FOLLOWER_I2C_ADDR, NumberFormat.UInt8BE);
+        let sensorValue = 0;
+
         switch (lineFollowerSensor) {
             case LineFollowerSensors.S1:
-				return data &  0x01;
+                sensorValue = data & 0x01;
+                break;
             case LineFollowerSensors.S2:
-				return data &  0x02;
+                sensorValue = data & 0x02;
+                break;
             case LineFollowerSensors.S3:
-                return data &  0x04;
+                sensorValue = data & 0x04;
+                break;
             case LineFollowerSensors.S4:
-               return data &  0x08;
+                sensorValue = data & 0x08;
+                break;
+            default:
+                sensorValue = 0;
+                break;
         }
-        return 0;
+
+        if (lineColor == LineColor.Black) {
+            return sensorValue ? 1 : 0;
+        } else {
+            return sensorValue ? 0 : 1;
+        }
     }
 
     
