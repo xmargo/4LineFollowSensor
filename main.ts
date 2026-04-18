@@ -38,7 +38,7 @@ namespace four_line_follow {
         }
         return 0;
     }
-}
+
     
     //% weight=96 blockId=line_followers block="4 Line follower %lineFollowerSensor at pin (P19:SCL,P20:SDA,Qdee board or Startbit board connect to port4) in %lineColor ?"
     //% inlineInputMode=inline
