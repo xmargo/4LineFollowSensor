@@ -22,6 +22,23 @@ namespace four_line_follow {
     }	
 
     const LINE_FOLLOWER_I2C_ADDR = 0x78   
+
+	export function get_line_followers(lineFollowerSensor: LineFollowerSensors, lineColor: LineColor): number {
+        pins.i2cWriteNumber(LINE_FOLLOWER_I2C_ADDR, 1, NumberFormat.UInt8BE);	    
+	    let data = pins.i2cReadNumber(LINE_FOLLOWER_I2C_ADDR, NumberFormat.UInt8BE);
+        switch (lineFollowerSensor) {
+            case LineFollowerSensors.S1:
+				return data &  0x01;
+            case LineFollowerSensors.S2:
+				return data &  0x02;
+            case LineFollowerSensors.S3:
+                return data &  0x04;
+            case LineFollowerSensors.S4:
+               return data &  0x08;
+        }
+        return 0;
+    }
+}
     
     //% weight=96 blockId=line_followers block="4 Line follower %lineFollowerSensor at pin (P19:SCL,P20:SDA,Qdee board or Startbit board connect to port4) in %lineColor ?"
     //% inlineInputMode=inline
