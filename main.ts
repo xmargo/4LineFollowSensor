@@ -46,11 +46,7 @@ namespace four_line_follow {
                 break;
         }
 
-        if (lineColor == LineColor.Black) {
-            return sensorValue ? 1 : 0;
-        } else {
-            return sensorValue ? 0 : 1;
-        }
+        return sensorValue;
     }
 
     
